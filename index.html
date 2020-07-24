@@ -8,40 +8,42 @@
 </svg>
   
 <script>
+  var width = 800;
+  var height = 800;
+  var margin = 50;
 
   async function init() {
     const data = await d3.csv('us_household_income_race.csv');
     console.log(data.length)
-    var xs = d3.scaleBand().domain(d3.range(data.length)).range([0,750]).padding(0.1)
-    var ys = d3.scaleLinear().domain([0,d3.max(data, d => d.medianIncome)]).range([0,750]);
+    var xs = d3.scaleBand().domain(d3.range(data.length)).range([0,(width-2*margin)]).padding(0.1)
+    var ys = d3.scaleLinear().domain([0,d3.max(data, d => d.medianIncome)]).nice().range([(height-2*margin),0]);
 
     var dataDomain = data.map(function (d){ return d.race; })
     var colorScheme = d3.scaleOrdinal().domain(dataDomain).range(d3.schemeCategory10)
 
     d3.select("svg")
-    .append("g").attr("transform","translate(50,50)")
+    .append("g").attr("transform","translate("+margin+","+margin+")")
     .selectAll().data(data).enter()
     .append("rect")
     .attr("x", function(d, i){return xs(i);})
-    .attr("y", function(d){return 750-ys(d.medianIncome);})
-    .attr("height", d => d.medianIncome)
+    .attr("y", function(d){return ys(d.medianIncome);})
+    .attr("height", d => (height-2*margin)-ys(d.medianIncome))
     .attr("width", xs.bandwidth())
     .attr("fill", function(d){return colorScheme(d.race);} )
 
 
-/*    d3.select("svg")
-    .append("g").attr("transform","translate(50,50)")
+   d3.select("svg")
+    .append("g").attr("transform","translate("+margin+","+margin+")")
     .call(d3.axisLeft(ys)
-    .tickValues([10,20,50,100])
-    .tickFormat(d3.format("~s"))
+    .ticks(5)
+    .tickFormat(d3.format("$"))
     )
 
     d3.select("svg")
-    .append("g").attr("transform","translate(50,250)")
+    .append("g").attr("transform","translate(" + margin + "," + (height-margin) + ")")
     .call(d3.axisBottom(xs)
-    .tickValues([10,20,50,100])
-    .tickFormat(d3.format("~s"))
-    )*/
+    .tickFormat(i => data[i].race)
+    )
   }
 </script>
   
