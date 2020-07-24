@@ -1,1 +1,1 @@
-# cs498_narrative_datavisualization
+# covid19_narrative_datavisualization
