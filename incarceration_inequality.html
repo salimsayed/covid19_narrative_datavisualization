@@ -1,0 +1,91 @@
+<html>
+<head>
+    <script src='https://d3js.org/d3.v5.min.js'></script>
+    <style>
+    div.tooltip {
+        position: absolute;
+        text-align: center;
+        width: 120px;
+        height: 28px;
+        padding: 2px;
+        font: 12px sans-serif;
+        background: white;
+        border: 1px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
+</style>
+</head>
+<body onload='init()'>
+<svg width=700 height=700></svg>
+<div class="tooltip" style="display:none">
+</div>
+
+<script>
+  var width = 700;
+  var height = 700;
+  var margin = 50;
+  var tooltip = d3.select(".tooltip")
+
+  async function init() {
+    const data = await d3.csv('us_incarceration_race.csv');
+
+    var xs = d3.scaleBand().domain(d3.range(data.length)).range([0,(width-2*margin)]).padding(0.1)
+    var ys = d3.scaleLinear().domain([0,d3.max(data, d => d.base)]).range([(height-2*margin),0]);
+
+    var dataDomain = data.map(function (d){ return d.race; })
+    var colorScheme = d3.scaleOrdinal().domain(dataDomain).range(d3.schemeCategory10)
+
+    d3.select("svg")
+    .append("g").attr("transform","translate("+margin+","+margin+")").attr("id","chart")
+    .selectAll().data(data).enter()
+    .append("rect")
+    .attr("x", function(d, i){return xs(i);})
+    .attr("y", function(d){return ys(d.incarceration);})
+    .attr("height", function(d){return (height-2*margin)-ys(d.incarceration);})
+    .attr("width", xs.bandwidth())
+    .attr("fill", function(d){return colorScheme(d.race);} )
+    .on("mouseover", function() { tooltip.style("display", null); })
+    .on("mouseout", function() { tooltip.style("display", "none"); })
+    .on("mousemove", function(d) {
+          var xPosition = d3.mouse(this)[0];
+          var yPosition = d3.mouse(this)[1];
+          tooltip.style("left", xPosition);
+          tooltip.style("top", yPosition);
+          tooltip.text(d.incarceration + " people in " + d.base);
+        });
+
+   d3.select("#chart").selectAll().data(data).enter()
+    .append("rect")
+    .attr("x", function(d, i){return xs(i);})
+    .attr("y", "0")
+    .attr("height", function(d){return ys(d.incarceration);})
+    .attr("width", xs.bandwidth())
+    .attr("fill", "#F2F0EF" )
+    .on("mouseover", function() { tooltip.style("display", null); })
+    .on("mouseout", function() { tooltip.style("display", "none"); })
+    .on("mousemove", function(d) {
+          var xPosition = d3.mouse(this)[0];
+          var yPosition = d3.mouse(this)[1];
+          tooltip.style("left", xPosition);
+          tooltip.style("top", yPosition);
+          tooltip.text(d.incarceration + " people in " + d.base);
+        });
+
+
+   d3.select("svg")
+    .append("g").attr("transform","translate("+margin+","+margin+")")
+    .call(d3.axisLeft(ys)
+    .tickValues([500,1000,2000,5000,10000])
+    )
+
+    d3.select("svg")
+    .append("g").attr("transform","translate(" + margin + "," + (height-margin) + ")")
+    .call(d3.axisBottom(xs)
+    .tickFormat(i => data[i].race)
+    )
+  }
+</script>
+
+</body>
+</html>

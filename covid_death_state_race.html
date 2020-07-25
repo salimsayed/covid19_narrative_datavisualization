@@ -1,0 +1,74 @@
+<html>
+<head>
+    <script src='https://d3js.org/d3.v5.min.js'></script>
+    <style>
+    div.tooltip {
+        position: absolute;
+        text-align: center;
+        width: 200px;
+        height: 28px;
+        padding: 2px;
+        font: 12px sans-serif;
+        background: white;
+        border: 1px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
+    circle {stroke: black;}
+    </style>
+</head>
+<body onload='init()'>
+<svg width=900 height=700></svg>
+<div class="tooltip" style="display:none">
+</div>
+
+<script>
+  var width = 900;
+  var height = 700;
+  var margin = 50;
+  var tooltip = d3.select(".tooltip")
+
+  async function init() {
+    const data = await d3.csv('covid_excess_death.csv');
+    var states = Array.from(new Set(data.map(d=>d.code)))
+    var races = ["Hispanic","Asian","Black","White","NativeAmerican"] /*Array.from(new Set(data.map(d => d.race)))*/
+    var excesses = data.map(d => parseInt(d.excess.trim()))
+    var excessMin = Math.min(...excesses)
+    var excessMax = Math.max(...excesses)
+
+    var xs = d3.scaleBand().domain(d3.range(states.length)).range([0,(width-2*margin)]).padding(0.1)
+    var ys = d3.scaleLinear().domain([excessMin-5,excessMax]).range([(height-2*margin),0]);
+    var colorScheme = d3.scaleOrdinal().domain(races).range(d3.schemeCategory10)
+
+    d3.select("svg")
+    .append("g").attr("transform","translate("+margin+","+margin+")")
+    .selectAll().data(data).enter()
+    .append("circle")
+    .attr("cx",function(d){return 25+xs(states.indexOf(d.code));})
+    .attr("cy",function(d){return ys(d.excess);})
+    .attr("r",function(d){return (parseInt(d.excess)+excessMax)/4;})
+    .style("fill",d=>colorScheme(d.race))
+    .on("mouseover", function() { tooltip.style("display", null); })
+    .on("mouseout", function() { tooltip.style("display", "none"); })
+    .on("mousemove", function(d) {
+          var xPosition = d3.mouse(this)[0];
+          var yPosition = d3.mouse(this)[1];
+          tooltip.style("left", xPosition);
+          tooltip.style("top", yPosition);
+          tooltip.text(d.excess + "% excess deaths happened for "+ d.race + " population in " + d.state);
+        });
+
+   d3.select("svg")
+    .append("g").attr("transform","translate("+margin+","+margin+")")
+    .call(d3.axisLeft(ys)
+    .ticks(10)
+    )
+
+    d3.select("svg")
+    .append("g").attr("transform","translate(" + margin + "," + (height-margin) + ")")
+    .call(d3.axisBottom(xs).tickFormat(i=>states[i]))
+  }
+</script>
+
+</body>
+</html>
