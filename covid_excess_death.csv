@@ -1,0 +1,216 @@
+race,state,excess,code
+Asian,Alabama,0,AL
+Black,Alabama,19,AL
+Hispanic,Alabama,-3,AL
+NativeAmerican,Alabama,0,AL
+White,Alabama,-14,AL
+Asian,Arizona,-2,AZ
+Black,Arizona,-1,AZ
+Hispanic,Arizona,-10,AZ
+NativeAmerican,Arizona,17,AZ
+White,Arizona,-5,AZ
+Asian,Arkansas,0,AR
+Black,Arkansas,12,AR
+Hispanic,Arkansas,0,AR
+NativeAmerican,Arkansas,0,AR
+White,Arkansas,-11,AR
+Asian,California,1,CA
+Black,California,4,CA
+Hispanic,California,1,CA
+NativeAmerican,California,0,CA
+White,California,-3,CA
+Asian,Colorado,0,CO
+Black,Colorado,3,CO
+Hispanic,Colorado,2,CO
+NativeAmerican,Colorado,0,CO
+White,Colorado,-4,CO
+Asian,Connecticut,-3,CT
+Black,Connecticut,4,CT
+Hispanic,Connecticut,-7,CT
+NativeAmerican,Connecticut,0,CT
+White,Connecticut,8,CT
+Asian,Delaware,-4,DE
+Black,Delaware,1,DE
+Hispanic,Delaware,-5,DE
+NativeAmerican,Delaware,0,DE
+White,Delaware,10,DE
+Asian,District of Columbia,0,DC
+Black,District of Columbia,30,DC
+Hispanic,District of Columbia,-1,DC
+NativeAmerican,District of Columbia,0,DC
+White,District of Columbia,-25,DC
+Asian,Florida,-1,FL
+Black,Florida,7,FL
+Hispanic,Florida,-2,FL
+NativeAmerican,Florida,0,FL
+White,Florida,-2,FL
+Asian,Georgia,-3,GA
+Black,Georgia,16,GA
+Hispanic,Georgia,-5,GA
+NativeAmerican,Georgia,0,GA
+White,Georgia,-6,GA
+Asian,Illinois,-1,IL
+Black,Illinois,13,IL
+Hispanic,Illinois,4,IL
+NativeAmerican,Illinois,0,IL
+White,Illinois,-16,IL
+Asian,Indiana,-1,IN
+Black,Indiana,10,IN
+Hispanic,Indiana,-4,IN
+NativeAmerican,Indiana,0,IN
+White,Indiana,-3,IN
+Asian,Iowa,2,IA
+Black,Iowa,3,IA
+Hispanic,Iowa,0,IA
+NativeAmerican,Iowa,1,IA
+White,Iowa,-6,IA
+Asian,Kansas,0,KS
+Black,Kansas,17,KS
+Hispanic,Kansas,3,KS
+NativeAmerican,Kansas,0,KS
+White,Kansas,-18,KS
+Asian,Kentucky,0,KY
+Black,Kentucky,9,KY
+Hispanic,Kentucky,-1,KY
+NativeAmerican,Kentucky,0,KY
+White,Kentucky,-6,KY
+Asian,Louisiana,-1,LA
+Black,Louisiana,21,LA
+Hispanic,Louisiana,-3,LA
+NativeAmerican,Louisiana,0,LA
+White,Louisiana,-16,LA
+Asian,Maine,-1,ME
+Black,Maine,0,ME
+Hispanic,Maine,0,ME
+NativeAmerican,Maine,0,ME
+White,Maine,3,ME
+Asian,Maryland,-2,MD
+Black,Maryland,13,MD
+Hispanic,Maryland,-1,MD
+NativeAmerican,Maryland,0,MD
+White,Maryland,-7,MD
+Asian,Massachusetts,-4,MA
+Black,Massachusetts,1,MA
+Hispanic,Massachusetts,-6,MA
+NativeAmerican,Massachusetts,0,MA
+White,Massachusetts,9,MA
+Asian,Michigan,-2,MI
+Black,Michigan,28,MI
+Hispanic,Michigan,-3,MI
+NativeAmerican,Michigan,0,MI
+White,Michigan,-21,MI
+Asian,Minnesota,-2,MN
+Black,Minnesota,1,MN
+Hispanic,Minnesota,-2,MN
+NativeAmerican,Minnesota,0,MN
+White,Minnesota,5,MN
+Asian,Mississippi,0,MS
+Black,Mississippi,12,MS
+Hispanic,Mississippi,0,MS
+NativeAmerican,Mississippi,4,MS
+White,Mississippi,-12,MS
+Asian,Missouri,-1,MO
+Black,Missouri,24,MO
+Hispanic,Missouri,-3,MO
+NativeAmerican,Missouri,0,MO
+White,Missouri,-18,MO
+Asian,Nebraska,0,NE
+Black,Nebraska,1,NE
+Hispanic,Nebraska,11,NE
+NativeAmerican,Nebraska,0,NE
+White,Nebraska,-13,NE
+Asian,Nevada,7,NV
+Black,Nevada,6,NV
+Hispanic,Nevada,-8,NV
+NativeAmerican,Nevada,0,NV
+White,Nevada,-3,NV
+Asian,New Hampshire,0,NH
+Black,New Hampshire,0,NH
+Hispanic,New Hampshire,0,NH
+NativeAmerican,New Hampshire,0,NH
+White,New Hampshire,2,NH
+Asian,New Jersey,-3,NJ
+Black,New Jersey,5,NJ
+Hispanic,New Jersey,0,NJ
+NativeAmerican,New Jersey,0,NJ
+White,New Jersey,0,NJ
+Asian,New Mexico,0,NM
+Black,New Mexico,0,NM
+Hispanic,New Mexico,-35,NM
+NativeAmerican,New Mexico,44,NM
+White,New Mexico,-6,NM
+Asian,New York,-1,NY
+Black,New York,7,NY
+Hispanic,New York,4,NY
+NativeAmerican,New York,0,NY
+White,New York,-10,NY
+Asian,New York City,-5,NYC
+Black,New York City,7,NYC
+Hispanic,New York City,0,NYC
+NativeAmerican,New York City,0,NYC
+White,New York City,-6,NYC
+Asian,North Carolina,0,NC
+Black,North Carolina,14,NC
+Hispanic,North Carolina,-5,NC
+NativeAmerican,North Carolina,0,NC
+White,North Carolina,-3,NC
+Asian,Ohio,-1,OH
+Black,Ohio,5,OH
+Hispanic,Ohio,-2,OH
+NativeAmerican,Ohio,0,OH
+White,Ohio,2,OH
+Asian,Oklahoma,0,OK
+Black,Oklahoma,1,OK
+Hispanic,Oklahoma,-7,OK
+NativeAmerican,Oklahoma,2,OK
+White,Oklahoma,9,OK
+Asian,Oregon,0,OR
+Black,Oregon,0,OR
+Hispanic,Oregon,-1,OR
+NativeAmerican,Oregon,0,OR
+White,Oregon,2,OR
+Asian,Pennsylvania,-1,PA
+Black,Pennsylvania,11,PA
+Hispanic,Pennsylvania,-2,PA
+NativeAmerican,Pennsylvania,0,PA
+White,Pennsylvania,-7,PA
+Asian,Rhode Island,0,RI
+Black,Rhode Island,-1,RI
+Hispanic,Rhode Island,-8,RI
+NativeAmerican,Rhode Island,0,RI
+White,Rhode Island,13,RI
+Asian,South Carolina,0,SC
+Black,South Carolina,24,SC
+Hispanic,South Carolina,0,SC
+NativeAmerican,South Carolina,0,SC
+White,South Carolina,-17,SC
+Asian,Tennessee,0,TN
+Black,Tennessee,16,TN
+Hispanic,Tennessee,2,TN
+NativeAmerican,Tennessee,0,TN
+White,Tennessee,-17,TN
+Asian,Texas,-3,TX
+Black,Texas,8,TX
+Hispanic,Texas,-5,TX
+NativeAmerican,Texas,0,TX
+White,Texas,1,TX
+Asian,Utah,0,UT
+Black,Utah,0,UT
+Hispanic,Utah,10,UT
+NativeAmerican,Utah,0,UT
+White,Utah,-19,UT
+Asian,Virginia,0,VA
+Black,Virginia,4,VA
+Hispanic,Virginia,1,VA
+NativeAmerican,Virginia,0,VA
+White,Virginia,-3,VA
+Asian,Washington,0,WA
+Black,Washington,0,WA
+Hispanic,Washington,-1,WA
+NativeAmerican,Washington,0,WA
+White,Washington,4,WA
+Asian,Wisconsin,-1,WI
+Black,Wisconsin,18,WI
+Hispanic,Wisconsin,3,WI
+NativeAmerican,Wisconsin,0,WI
+White,Wisconsin,-20,WI
