@@ -15,6 +15,7 @@
         pointer-events: none;
     }
     circle {stroke: black;}
+    .font{font: 12px sans-serif;}
     </style>
 </head>
 <body onload='init()'>
@@ -67,6 +68,23 @@
     d3.select("svg")
     .append("g").attr("transform","translate(" + margin + "," + (height-margin) + ")")
     .call(d3.axisBottom(xs).tickFormat(i=>states[i]))
+
+    d3.select("svg")
+    .append("text")
+    .attr("transform", "translate(" + (width/2) + " ," + (height) + ")")
+    .attr("class","font")
+    .style("text-anchor", "middle")
+    .text("State");
+
+    d3.select("svg")
+    .append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x",0 - (height / 2))
+    .attr("dy", "1em")
+    .attr("class","font")
+    .style("text-anchor", "middle")
+    .text("% Excess Death");
   }
 </script>
 
