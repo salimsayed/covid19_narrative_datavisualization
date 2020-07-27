@@ -2,6 +2,13 @@
 <head>
     <script src='https://d3js.org/d3.v5.min.js'></script>
     <style>
+    p {
+        text-align: left;
+        padding: 25px;
+        font: 14px sans-serif;
+        background: white;
+        width: 900px;
+    }
     div.tooltip {
         position: absolute;
         text-align: center;
@@ -18,12 +25,19 @@
 </style>
 </head>
 <body onload='init()'>
-<svg width=700 height=700></svg>
+<p>
+    Almost 40% of the US prison population of 2.2M people is Black whereas only 15% of the US population is Black. Most of the
+    people in the prison are on drugs related charges, many of the offences are minor in nature. There are many people in the jails because
+    they couldn't pay legal fees. When a parent in incarcerated the kids grow up without no one to look up to, without support and guidance
+    they mayn't continue education and another generation of poor will be created.
+    Here is the <a href="covid_death_state_race.html">Covid19 related death</a> across all states of US per race.
+</p>
+<svg width=900 height=700></svg>
 <div class="tooltip" style="display:none">
 </div>
 
 <script>
-  var width = 700;
+  var width = 900;
   var height = 700;
   var margin = 50;
   var tooltip = d3.select(".tooltip")
@@ -42,16 +56,16 @@
     .selectAll().data(data).enter()
     .append("rect")
     .attr("x", function(d, i){return xs(i);})
-    .attr("y", "0") /* .attr("y", function(d){return ys(d.incarceration);}) */
-    .attr("height", (height-2*margin)) /* .attr("height", function(d){return (height-2*margin)-ys(d.incarceration);}) */
+    .attr("y", "0")
+    .attr("height", (height-2*margin))
     .attr("width", xs.bandwidth())
-    .attr("fill", "#F2F0EF" ) /* function(d){return colorScheme(d.race);} */
+    .attr("fill", "#F2F0EF" )
     .attr("class","bars")
     .on("mouseover", function() { tooltip.style("display", null); })
     .on("mouseout", function() { tooltip.style("display", "none"); })
     .on("mousemove", function(d) {
           var xPosition = d3.mouse(this)[0];
-          var yPosition = d3.mouse(this)[1];
+          var yPosition = d3.mouse(this)[1]+90;
           tooltip.style("left", xPosition);
           tooltip.style("top", yPosition);
           tooltip.text(d.incarceration + " people in " + d.base);
@@ -68,7 +82,7 @@
     .on("mouseout", function() { tooltip.style("display", "none"); })
     .on("mousemove", function(d) {
           var xPosition = d3.mouse(this)[0];
-          var yPosition = d3.mouse(this)[1];
+          var yPosition = d3.mouse(this)[1]+90;
           tooltip.style("left", xPosition);
           tooltip.style("top", yPosition);
           tooltip.text(d.incarceration + " people in " + d.base);
@@ -102,7 +116,7 @@
     .duration(800)
     .attr("y", function(d){return ys(d.incarceration);})
     .attr("height", function(d){return (height-2*margin)-ys(d.incarceration);})
-    .attr("fill", function(d){return colorScheme(d.race);} ) /*  */
+    .attr("fill", function(d){return colorScheme(d.race);} )
     .delay(function(d,i){return(i*100)})
     ;
   }

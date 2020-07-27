@@ -2,6 +2,13 @@
 <head>
     <script src='https://d3js.org/d3.v5.min.js'></script>
     <style>
+     p {
+        text-align: left;
+        padding: 25px;
+        font: 14px sans-serif;
+        background: white;
+        width: 900px;
+    }
     div.tooltip {
         position: absolute;
         text-align: center;
@@ -14,12 +21,48 @@
         border-radius: 8px;
         pointer-events: none;
     }
+    div.annotation {
+        position: absolute;
+        text-align: center;
+        width: 250px;
+        height: 30px;
+        line-height:50px;
+        padding: 2px;
+        font: 12px sans-serif;
+        background:lightblue;
+        border: 1px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
     circle {stroke: black;}
     .font{font: 12px sans-serif;}
     </style>
 </head>
 <body onload='init()'>
-<svg width=900 height=700></svg>
+<p>
+This is Covid19 related death data by rate obtained from CDC. It shows the difference between population percentage and death percentage
+for a given race. Please choose a race to see how Covid19 has impacted that community.
+</p>
+<div >
+<form name="covid" style="padding-left:25px;font:14px sans-serif;">
+    <input type="checkbox" id="Asian" name="Asian" value="Asian" onclick="filter()">
+    <label for="Asian">Asian</label>
+    <input type="checkbox" id="Black" name="Black" value="Black" onclick="filter()">
+    <label for="Black">Black</label>
+    <input type="checkbox" id="Hispanic" name="Hispanic" value="Hispanic" onclick="filter()">
+    <label for="Hispanic">Hispanic</label>
+    <input type="checkbox" id="NativeAmerican" name="NativeAmerican" value="NativeAmerican" onclick="filter()">
+    <label for="NativeAmerican">Native American</label>
+    <input type="checkbox" id="White" name="White" value="White" onclick="filter()">
+    <label for="White">White</label>
+</form>
+</div>
+<svg width=900 height=700>
+    <path d="M 880 50 H 900 V 350 H 880" fill="transparent" stroke="black" />
+    <path d="M 880 370 H 900 V 650 H 880" fill="transparent" stroke="black" />
+</svg>
+<div class="annotation" style="left:910;top:250;height:60px">The poor households of mostly Black and Native american people have faced higher Covid19 death rate than their population share.</div>
+<div class="annotation" style="left:910;top:600;">The well off households of White and Asian people have managed to stay off Covid19. </div>
 <div class="tooltip" style="display:none">
 </div>
 
@@ -27,19 +70,53 @@
   var width = 900;
   var height = 700;
   var margin = 50;
-  var tooltip = d3.select(".tooltip")
+  var tooltip = d3.select(".tooltip");
+  var races = ["Hispanic","Asian","Black","White","NativeAmerican"];
+  var colorScheme = d3.scaleOrdinal().domain(races).range(d3.schemeCategory10);
 
-  async function init() {
+  async function filter(){
+    var r = []
+    if(document.getElementById("White").checked){
+        r.push("White")
+    }
+    if(document.getElementById("Black").checked){
+        r.push("Black")
+    }
+    if(document.getElementById("Asian").checked){
+        r.push("Asian")
+    }
+    if(document.getElementById("NativeAmerican").checked){
+        r.push("NativeAmerican")
+    }
+    if(document.getElementById("Hispanic").checked){
+        r.push("Hispanic")
+    }
+    if(r.length == 0){
+        r = races
+    }
     const data = await d3.csv('covid_excess_death.csv');
-    var states = Array.from(new Set(data.map(d=>d.code)))
-    var races = ["Hispanic","Asian","Black","White","NativeAmerican"] /*Array.from(new Set(data.map(d => d.race)))*/
     var excesses = data.map(d => parseInt(d.excess.trim()))
     var excessMin = Math.min(...excesses)
     var excessMax = Math.max(...excesses)
 
+    var data1 = data.filter(d=> r.includes(d.race))
+    d3.selectAll("g").remove()
+    render(data1, races, excessMin, excessMax);
+  }
+
+  async function init() {
+    const data = await d3.csv('covid_excess_death.csv');
+    var excesses = data.map(d => parseInt(d.excess.trim()))
+    var excessMin = Math.min(...excesses)
+    var excessMax = Math.max(...excesses)
+
+    render(data, races, excessMin, excessMax);
+  }
+
+  function render(data, races, excessMin, excessMax){
+    var states = Array.from(new Set(data.map(d=>d.code)))
     var xs = d3.scaleBand().domain(d3.range(states.length)).range([0,(width-2*margin)]).padding(0.1)
     var ys = d3.scaleLinear().domain([excessMin-5,excessMax]).range([(height-2*margin),0]);
-    var colorScheme = d3.scaleOrdinal().domain(races).range(d3.schemeCategory10)
 
     d3.select("svg")
     .append("g").attr("transform","translate("+margin+","+margin+")")
@@ -53,7 +130,7 @@
     .on("mouseout", function() { tooltip.style("display", "none"); })
     .on("mousemove", function(d) {
           var xPosition = d3.mouse(this)[0];
-          var yPosition = d3.mouse(this)[1];
+          var yPosition = d3.mouse(this)[1]+80;
           tooltip.style("left", xPosition);
           tooltip.style("top", yPosition);
           tooltip.text(d.excess + "% excess deaths happened for "+ d.race + " population in " + d.state);
@@ -79,7 +156,7 @@
     d3.select("svg")
     .append("text")
     .attr("transform", "rotate(-90)")
-    .attr("y", 0 - margin.left)
+    .attr("y", 0)
     .attr("x",0 - (height / 2))
     .attr("dy", "1em")
     .attr("class","font")

@@ -2,6 +2,13 @@
 <head>
     <script src='https://d3js.org/d3.v5.min.js'></script>
     <style>
+    p {
+        text-align: left;
+        padding: 25px;
+        font: 14px sans-serif;
+        background: white;
+        width: 900px;
+    }
     div.tooltip {
         position: absolute;
         text-align: center;
@@ -14,16 +21,40 @@
         border-radius: 8px;
         pointer-events: none;
     }
+    div.annotation {
+        position: absolute;
+        text-align: center;
+        width: 250px;
+        height: 30px;
+        line-height:50px;
+        padding: 2px;
+        font: 12px sans-serif;
+        background:lightblue;
+        border: 1px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
     .font{font: 12px sans-serif;}
 </style>
 </head>
 <body onload='init()'>
-<svg width=700 height=700></svg>
-<div class="tooltip" style="display:none">
-</div>
+<p>
+    The Black, Native American and Hispanic communities make fare less income than White and Asian communities. The better income leads to better health condition,
+    life expectancy which helps tremendously if some one is sick of Covid19. It leads to better savings which provides cushion during joblessness, better living conditions
+    where people can socially distance from others.
+    A lot of deaths are reported in <a href="incarceration_inequality.html">the correction facilities</a> which has horrible living conditions.
+</p>
+<svg width=900 height=700>
+    <path d="M 450 370 L 800 260" fill="black" stroke="black" />
+    <path d="M 780 380 L 800 260" fill="black" stroke="black" />
+</svg>
+<div class="tooltip" style="display:none"></div>
+
+<div class="annotation" style="left:750;top:350;">Black and Native American households make almost half of Asian and White households.</div>
+
 
 <script>
-  var width = 700;
+  var width = 900;
   var height = 700;
   var margin = 50;
   var tooltip = d3.select(".tooltip")
@@ -50,7 +81,7 @@
     .on("mouseout", function() { tooltip.style("display", "none"); })
     .on("mousemove", function(d) {
           var xPosition = d3.mouse(this)[0];
-          var yPosition = d3.mouse(this)[1];
+          var yPosition = d3.mouse(this)[1]+90;
           tooltip.style("left", xPosition);
           tooltip.style("top", yPosition);
           tooltip.text("Median Income $" +d.medianIncome);
@@ -72,7 +103,7 @@
     d3.select("svg")
     .append("text")
     .attr("transform", "rotate(-90)")
-    .attr("y", 0 - margin.left)
+    .attr("y", 0 )
     .attr("x",0 - (height / 2))
     .attr("dy", "1em")
     .attr("class","font")
